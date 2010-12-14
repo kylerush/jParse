@@ -1,0 +1,11 @@
+/*
+ * jParse (Beta) v0.3.3
+ * jparse.kylerush.net
+ *
+ * Copyright (c) 2009 Kyle Rush
+ * Licensed under the MIT license.
+ * http://creativecommons.org/licenses/MIT/
+ *
+ * Date: Wednesday, 7 Apr 2010 20:22 (GMT - 5:00)
+ */
+(function(c){c.fn.extend({jParse:function(p){settings=c.extend(true,{ajaxOpts:{dataType:c.browser.msie?"text":"xml",contentType:"text/xml"},parentElement:"item",elementTag:["title","link","description"],output:'<div><h2><a href="jpet01">jpet00</a></h2><p>jpet02</p></div>'},p);settings.precallback!==undefined&&settings.precallback();var j=c(this),q=/\:/;settings.ajaxOpts.success=function(e){function k(f){elemTagName=q.test(f)===true?"[nodeName="+f+"]":f}function l(f,g){if(a.elementTag[b].elem===undefined){k(f); elemTagValue=c(g).find(elemTagName).text();elemTagValue=elemTagValue.replace(/^\[CDATA\[/,"").replace(/\]\]$/,"")}else{k(f);if(a.elementTag[b].attr===undefined)if(a.elementTag[b].select!==undefined){f=c(g).find(elemTagName);elemTagValue=c(f[a.elementTag[b].select]).text()}else{if(a.elementTag[b].select===undefined)elemTagValue=c(g).find(elemTagName).text()}else elemTagValue=c(g).find(elemTagName).attr(a.elementTag[b].attr);if(a.elementTag[b].exclude!==undefined)if((new RegExp(a.elementTag[b].exclude)).test(elemTagValue)=== true)m=true;if(a.elementTag[b].format!==undefined)elemTagValue=a.elementTag[b].format(elemTagValue);if(a.elementTag[b].dateFormat!==undefined)elemTagValue=date(a.elementTag[b].dateFormat,elemTagValue)}}var d;if(typeof e=="string"){d=new ActiveXObject("Microsoft.XMLDOM");d.async=false;d.loadXML(e)}else d=e;var a=settings;e=c(d).find(a.parentElement);d="";var n=0;a.count!==undefined&&jQuery(a.count).append(e.length);for(var h=0;h<e.length;h++){if(n>=settings.limit){c(j).append(d);settings.callback!== undefined&&settings.callback();return false}for(var i=a.output,m=false,b=0;b<a.elementTag.length;b++){var o;o=b<10?new RegExp("jpet0"+[b],"g"):new RegExp("jpet"+[b],"g");if(a.elementTag[b].constructor==String)l(a.elementTag[b],e[h]);else a.elementTag[b].constructor==Object&&l(a.elementTag[b].elem,e[h]);i=i.replace(o,elemTagValue)}if(m!==true){d+=i;n++}}c(j).append(d);settings.callback!==undefined&&settings.callback()};return this.each(function(){c.ajax(settings.ajaxOpts)})}})})(jQuery);
